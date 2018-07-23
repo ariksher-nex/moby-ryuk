@@ -108,6 +108,7 @@ TimeoutLoop:
 	}
 
 	deletedContainers := make(map[string]bool)
+	deletedServices := make(map[string]bool)
 	deletedNetworks := make(map[string]bool)
 	deletedVolumes := make(map[string]bool)
 
@@ -126,6 +127,15 @@ TimeoutLoop:
 			for _, container := range containers {
 				cli.ContainerRemove(context.Background(), container.ID, types.ContainerRemoveOptions{RemoveVolumes: true, Force: true})
 				deletedContainers[container.ID] = true
+			}
+		}
+
+		if services, err := cli.ServiceList(context.Background(), types.ServiceListOptions{Filters: args}); err != nil {
+			log.Println(err)
+		} else {
+			for _, service := range services {
+				cli.ServiceRemove(context.Background(), service.ID)
+				deletedServices[service.ID] = true
 			}
 		}
 
