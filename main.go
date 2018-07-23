@@ -150,5 +150,5 @@ TimeoutLoop:
 		}
 	}
 
-	log.Printf("Removed %d container(s), %d network(s), %d volume(s)", len(deletedContainers), len(deletedNetworks), len(deletedVolumes))
+	log.Printf("Removed %d container(s), %d service(s), %d network(s), %d volume(s)", len(deletedContainers), len(deletedServices), len(deletedNetworks), len(deletedVolumes))
 }

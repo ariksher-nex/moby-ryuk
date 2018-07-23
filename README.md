@@ -1,6 +1,6 @@
 # Moby Ryuk
 
-This project helps you to remove containers/networks/volumes by given filter after specified delay.
+This project helps you to remove containers/services/networks/volumes by given filter after specified delay.
 
 # Usage
 
@@ -27,7 +27,7 @@ This project helps you to remove containers/networks/volumes by given filter aft
 
         printf "label=something_else" | nc localhost 8080
 
-1. See containers/networks/volumes deleted after 10s:
+1. See containers/services/networks/volumes deleted after 10s:
 
         2018/01/15 18:38:52 Timed out waiting for connection
         2018/01/15 18:38:52 Deleting {"label":{"something":true}}
