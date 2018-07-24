@@ -33,4 +33,4 @@ This project helps you to remove containers/services/networks/volumes by given f
         2018/01/15 18:38:52 Deleting {"label":{"something":true}}
         2018/01/15 18:38:52 Deleting {"label":{"something_else":true}}
         2018/01/15 18:38:52 Deleting {"health":{"unhealthy":true},"label":{"testing=true":true}}
-        2018/01/15 18:38:52 Removed 1 container(s), 0 network(s), 0 volume(s)
+        2018/01/15 18:38:52 Removed 1 container(s), 0 service(s), 0 network(s), 0 volume(s)
