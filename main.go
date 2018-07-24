@@ -107,8 +107,8 @@ TimeoutLoop:
 		}
 	}
 
-	deletedContainers := make(map[string]bool)
 	deletedServices := make(map[string]bool)
+	deletedContainers := make(map[string]bool)
 	deletedNetworks := make(map[string]bool)
 	deletedVolumes := make(map[string]bool)
 
