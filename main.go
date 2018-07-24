@@ -107,8 +107,8 @@ TimeoutLoop:
 		}
 	}
 
-	deletedContainers := make(map[string]bool)
 	deletedServices := make(map[string]bool)
+	deletedContainers := make(map[string]bool)
 	deletedNetworks := make(map[string]bool)
 	deletedVolumes := make(map[string]bool)
 
@@ -121,21 +121,21 @@ TimeoutLoop:
 			continue
 		}
 
-		if containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{All: true, Filters: args}); err != nil {
-			log.Println(err)
-		} else {
-			for _, container := range containers {
-				cli.ContainerRemove(context.Background(), container.ID, types.ContainerRemoveOptions{RemoveVolumes: true, Force: true})
-				deletedContainers[container.ID] = true
-			}
-		}
-
 		if services, err := cli.ServiceList(context.Background(), types.ServiceListOptions{Filters: args}); err != nil {
 			log.Println(err)
 		} else {
 			for _, service := range services {
 				cli.ServiceRemove(context.Background(), service.ID)
 				deletedServices[service.ID] = true
+			}
+		}
+
+		if containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{All: true, Filters: args}); err != nil {
+			log.Println(err)
+		} else {
+			for _, container := range containers {
+				cli.ContainerRemove(context.Background(), container.ID, types.ContainerRemoveOptions{RemoveVolumes: true, Force: true})
+				deletedContainers[container.ID] = true
 			}
 		}
 
@@ -150,5 +150,5 @@ TimeoutLoop:
 		}
 	}
 
-	log.Printf("Removed %d container(s), %d service(s), %d network(s), %d volume(s)", len(deletedContainers), len(deletedServices), len(deletedNetworks), len(deletedVolumes))
+	log.Printf("Removed %d %d service(s), container(s), %d network(s), %d volume(s)", len(deletedContainers), len(deletedServices), len(deletedNetworks), len(deletedVolumes))
 }
